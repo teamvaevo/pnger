@@ -5,7 +5,7 @@ import useStore from "~/utils/store/globalStore";
 interface IProps {
   className?: string;
   onUpload: () => void;
-  transform: () => void;
+  transform: (factor: number) => void;
 }
 
 function UploadField(props: IProps) {
@@ -20,6 +20,7 @@ function UploadField(props: IProps) {
 
   const [uploaded, setUploaded] = useState(uploadedImage !== null);
   const [filename, setFileName] = useState(uploadedImage?.name ?? "");
+  const [resolutionFactor, setResolutionFactor] = useState(3);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -63,8 +64,12 @@ function UploadField(props: IProps) {
   );
   let nonAccepted = isDragActive ? activeParagraph : inactiveParagraph;
   // flex h-40 w-1/2 items-center justify-center rounded-lg border-2 border-dashed border-black bg-purple-200
+  function handleSliderChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setResolutionFactor(parseInt(event.target.value));
+  }
+
   return (
-    <>
+    <div className="flex flex-col space-y-10">
       <div
         {...getRootProps()}
         className={
@@ -77,22 +82,32 @@ function UploadField(props: IProps) {
         <div className="text-xl">{uploaded ? imgPreview : nonAccepted}</div>
       </div>
       <div className="flex w-full justify-center space-x-6">
+        <div>Resolution factor: {resolutionFactor}</div>
+        <input
+          type="range"
+          max={6}
+          min={1}
+          value={resolutionFactor}
+          onChange={handleSliderChange}
+        />
+      </div>
+      <div className="flex w-full justify-center space-x-6">
         <button
-          className="btn btn-error mt-4"
+          className="btn btn-error"
           onClick={clearUpload}
           disabled={!uploaded}
         >
           clear
         </button>
         <button
-          className="btn btn-primary ml-4 mt-4"
-          onClick={() => props.transform()}
+          className="btn btn-primary"
+          onClick={() => props.transform(resolutionFactor)}
           disabled={!uploaded}
         >
           transform
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

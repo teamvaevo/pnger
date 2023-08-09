@@ -9,8 +9,8 @@ export default function Transformer() {
 
   function handleUpload() {}
 
-  function transform() {
-    pdfToPNGs(uploadedImage as File).then((res) => {
+  function transform(factor: number) {
+    pdfToPNGs(uploadedImage as File, factor).then((res) => {
       downloadPNGs(res);
     });
   }
