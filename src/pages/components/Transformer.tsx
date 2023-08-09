@@ -1,22 +1,19 @@
 import { api } from "~/utils/api";
 import UploadField from "./UploadField";
 import useStore from "~/utils/store/globalStore";
+import { downloadPNGs, pdfToPNGs } from "~/utils/transform";
 
 export default function Transformer() {
   const { uploadedImage, setUploadedImage, clearUploadedImage } = useStore();
   const transformQuery = api.file.transform.useQuery({ text: "from tRPC" });
 
-  function handleUpload() {
-    console.log("uploading");
-    // uploadedImage;
-    // transformQuery.refetch;
-  }
+  function handleUpload() {}
 
   function transform() {
-    console.log("transforming");
-    // uploadedImage;
-    // transformQuery.refetch;
-    console.log(uploadedImage);
+    pdfToPNGs(uploadedImage).then((res) => {
+      console.log(res);
+      downloadPNGs(res);
+    });
   }
 
   return (
