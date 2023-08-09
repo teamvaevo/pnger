@@ -76,16 +76,22 @@ function UploadField(props: IProps) {
         <input {...getInputProps()} multiple={false} />
         <div className="text-xl">{uploaded ? imgPreview : nonAccepted}</div>
       </div>
-      <button className="btn mt-4" onClick={clearUpload} disabled={!uploaded}>
-        clear
-      </button>
-      <button
-        className="btn ml-4 mt-4"
-        onClick={() => props.transform()}
-        disabled={!uploaded}
-      >
-        transform
-      </button>
+      <div className="flex w-full justify-center space-x-6">
+        <button
+          className="btn btn-error mt-4"
+          onClick={clearUpload}
+          disabled={!uploaded}
+        >
+          clear
+        </button>
+        <button
+          className="btn btn-primary ml-4 mt-4"
+          onClick={() => props.transform()}
+          disabled={!uploaded}
+        >
+          transform
+        </button>
+      </div>
     </>
   );
 }

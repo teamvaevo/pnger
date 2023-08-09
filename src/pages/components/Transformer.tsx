@@ -17,7 +17,7 @@ export default function Transformer() {
 
   return (
     <div className="flex h-screen w-full flex-col items-center">
-      <div className="w-1/2">
+      <div className="my-20 w-full px-8 md:w-1/2 md:px-0">
         <UploadField onUpload={handleUpload} transform={transform} />
       </div>
     </div>
