@@ -7,10 +7,7 @@ export default function Footer() {
     <footer className="flex w-full items-center justify-center bg-base-300 px-4 py-6">
       <div>
         {hasImprint && (
-          <a
-            href={env.NEXT_PUBLIC_IMPRINT_URL}
-            className="hover:underline active:opacity-80"
-          >
+          <a href={env.NEXT_PUBLIC_IMPRINT_URL} className="link-hover link">
             {env.NEXT_PUBLIC_IMPRINT}
           </a>
         )}
