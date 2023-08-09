@@ -3,14 +3,16 @@
  * @param {File} pdfFile - The PDF File object.
  * @return {Promise} - Resolves with an array of PNG data URLs.
  */
-export function pdfToPNGs(pdfFile) {
+export function pdfToPNGs(pdfFile: File): Promise<string[]> {
   return new Promise(async (resolve, reject) => {
     const fileReader = new FileReader();
 
     fileReader.onload = async function (event) {
+      // @ts-ignore
       const typedArray = new Uint8Array(event.target.result);
 
       // Load the PDF file with pdf.js
+      // @ts-ignore
       const pdf = await pdfjsLib.getDocument({ data: typedArray }).promise;
 
       const totalPages = pdf.numPages;
@@ -41,7 +43,7 @@ export function pdfToPNGs(pdfFile) {
   });
 }
 
-export function downloadPNGs(pngDataUrls) {
+export function downloadPNGs(pngDataUrls: string[]) {
   pngDataUrls.forEach((dataUrl, index) => {
     const a = document.createElement("a");
     a.href = dataUrl;

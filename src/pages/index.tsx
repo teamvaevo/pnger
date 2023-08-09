@@ -13,7 +13,6 @@ export default function Home() {
       </Head>
       <Transformer />
       <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0-alpha.12/html2canvas.min.js"></script>
     </>
   );
 }
