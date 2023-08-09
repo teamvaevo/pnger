@@ -18,6 +18,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_IMPRINT: z.string().min(1),
     NEXT_PUBLIC_IMPRINT_URL: z.string().url(),
+    NEXT_PUBLIC_LANGUAGE: z.enum(["en", "de"]),
   },
 
   /**
@@ -28,6 +29,7 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_IMPRINT: process.env.NEXT_PUBLIC_IMPRINT,
     NEXT_PUBLIC_IMPRINT_URL: process.env.NEXT_PUBLIC_IMPRINT_URL,
+    NEXT_PUBLIC_LANGUAGE: process.env.NEXT_PUBLIC_LANGUAGE,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

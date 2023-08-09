@@ -16,11 +16,13 @@
     "@trpc/react-query": "^10.26.0",
     "@trpc/server": "^10.26.0",
     "html2canvas": "^1.4.1",
+    "i18next": "^23.4.4",
     "next": "^13.4.2",
     "pdfjs": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-i18next": "^13.0.3",
     "superjson": "1.12.2",
     "zod": "^3.21.4",
     "zustand": "^4.4.1"
