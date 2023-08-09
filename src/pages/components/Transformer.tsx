@@ -16,10 +16,9 @@ export default function Transformer() {
   }
 
   return (
-    <div className="flex h-screen w-full flex-col items-center">
-      <div className="my-20 w-full px-8 sm:w-3/4 md:w-1/2 md:px-0">
-        <UploadField onUpload={handleUpload} transform={transform} />
-      </div>
+    <div className="my-20">
+      <UploadField onUpload={handleUpload} transform={transform} />
+      <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     </div>
   );
 }

@@ -82,7 +82,7 @@ function UploadField(props: IProps) {
         <div className="text-xl">{uploaded ? imgPreview : nonAccepted}</div>
       </div>
       <div className="flex w-full flex-col items-center space-y-2">
-        <div className="">Scaling factor: {resolutionFactor}</div>
+        <p>Scaling factor: {resolutionFactor}</p>
         <input
           type="range"
           className="range range-sm"
@@ -91,6 +91,9 @@ function UploadField(props: IProps) {
           value={resolutionFactor}
           onChange={handleSliderChange}
         />
+        <p className="text-sm italic">
+          A scaling factor of 3 should be sufficient for most use cases.
+        </p>
       </div>
       <div className="flex w-full justify-center space-x-6">
         <button
