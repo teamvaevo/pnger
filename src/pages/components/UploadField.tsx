@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import useStore from "~/utils/store/globalStore";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   className?: string;
@@ -23,6 +24,7 @@ function UploadField(props: IProps) {
   const [resolutionFactor, setResolutionFactor] = useState(3);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { t } = useTranslation();
 
   const imgPreview: React.ReactNode = (
     <div className="flex w-full flex-col items-center justify-center">
@@ -50,18 +52,9 @@ function UploadField(props: IProps) {
     clearUploadedImage();
   }
 
-  let activeParagraph = (
-    <p>
-      <span className="font-bold">Drop</span> your image here
-    </p>
-  );
+  let activeParagraph = <p>{t("LABEL_DROP_FILE")}</p>;
 
-  let inactiveParagraph = (
-    <p>
-      Drag 'n' <span className="font-bold">drop</span> some files here, or click
-      to <span className="font-bold">select</span> files.
-    </p>
-  );
+  let inactiveParagraph = <p>{t("LABEL_DRAGNDROP")}</p>;
   let nonAccepted = isDragActive ? activeParagraph : inactiveParagraph;
   // flex h-40 w-1/2 items-center justify-center rounded-lg border-2 border-dashed border-black bg-purple-200
   function handleSliderChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -82,7 +75,9 @@ function UploadField(props: IProps) {
         <div className="text-xl">{uploaded ? imgPreview : nonAccepted}</div>
       </div>
       <div className="flex w-full flex-col items-center space-y-2">
-        <p>Scaling factor: {resolutionFactor}</p>
+        <p>
+          {t("LABEL_SCALING_FACTOR")}: {resolutionFactor}
+        </p>
         <input
           type="range"
           className="range range-sm"
@@ -91,9 +86,7 @@ function UploadField(props: IProps) {
           value={resolutionFactor}
           onChange={handleSliderChange}
         />
-        <p className="text-sm italic">
-          A scaling factor of 3 should be sufficient for most use cases.
-        </p>
+        <p className="text-sm italic">{t("HOME_SCALING")}</p>
       </div>
       <div className="flex w-full justify-center space-x-6">
         <button
@@ -101,14 +94,14 @@ function UploadField(props: IProps) {
           onClick={clearUpload}
           disabled={!uploaded}
         >
-          clear
+          {t("BUTTON_CLEAR")}
         </button>
         <button
           className="btn btn-primary"
           onClick={() => props.transform(resolutionFactor)}
           disabled={!uploaded}
         >
-          transform
+          {t("BUTTON_TRANSFORM")}
         </button>
       </div>
     </div>
