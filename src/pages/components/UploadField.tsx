@@ -81,10 +81,11 @@ function UploadField(props: IProps) {
         <input {...getInputProps()} multiple={false} />
         <div className="text-xl">{uploaded ? imgPreview : nonAccepted}</div>
       </div>
-      <div className="flex w-full justify-center space-x-6">
-        <div>Resolution factor: {resolutionFactor}</div>
+      <div className="flex w-full flex-col items-center space-y-2">
+        <div className="">Scaling factor: {resolutionFactor}</div>
         <input
           type="range"
+          className="range range-sm"
           max={6}
           min={1}
           value={resolutionFactor}
