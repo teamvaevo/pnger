@@ -5,6 +5,7 @@ import useStore from "~/utils/store/globalStore";
 interface IProps {
   className?: string;
   onUpload: () => void;
+  transform: () => void;
 }
 
 function UploadField(props: IProps) {
@@ -18,13 +19,11 @@ function UploadField(props: IProps) {
   }, []);
 
   const [uploaded, setUploaded] = useState(uploadedImage !== null);
-  const [filename, setFileName] = useState(
-    uploadedImage === null ? "" : `pixs.${uploadedImage.type.split("/")[1]}`
-  );
+  const [filename, setFileName] = useState(uploadedImage?.name ?? "");
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  let imgPreview: React.ReactNode = (
+  const imgPreview: React.ReactNode = (
     <div className="flex w-full flex-col items-center justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +64,7 @@ function UploadField(props: IProps) {
   let nonAccepted = isDragActive ? activeParagraph : inactiveParagraph;
   // flex h-40 w-1/2 items-center justify-center rounded-lg border-2 border-dashed border-black bg-purple-200
   return (
-    <div className="w-1/2">
+    <>
       <div
         {...getRootProps()}
         className={
@@ -77,7 +76,17 @@ function UploadField(props: IProps) {
         <input {...getInputProps()} multiple={false} />
         <div className="text-xl">{uploaded ? imgPreview : nonAccepted}</div>
       </div>
-    </div>
+      <button className="btn mt-4" onClick={clearUpload} disabled={!uploaded}>
+        clear
+      </button>
+      <button
+        className="btn ml-4 mt-4"
+        onClick={() => props.transform()}
+        disabled={!uploaded}
+      >
+        transform
+      </button>
+    </>
   );
 }
 
