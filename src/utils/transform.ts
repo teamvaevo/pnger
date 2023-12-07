@@ -3,7 +3,14 @@
  * @param {File} pdfFile - The PDF File object.
  * @return {Promise} - Resolves with an array of PNG data URLs.
  */
-export function pdfToPNGs(pdfFile: File, resFactor: number): Promise<string[]> {
+export async function pdfToPNGs(
+  pdfFile: File,
+  resFactor: number
+): Promise<string[]> {
+  // @ts-ignore
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://mozilla.github.io/pdf.js/build/pdf.worker.mjs";
+
   return new Promise(async (resolve, reject) => {
     const fileReader = new FileReader();
 
@@ -40,7 +47,6 @@ export function pdfToPNGs(pdfFile: File, resFactor: number): Promise<string[]> {
     };
 
     fileReader.onerror = reject;
-
     fileReader.readAsArrayBuffer(pdfFile);
   });
 }
